@@ -1,0 +1,40 @@
+group 'kottage'
+version '0.1-SNAPSHOT'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.0.0"
+    }
+}
+
+apply plugin: 'kotlin'
+apply plugin: 'maven-publish'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib:1.0.0"
+    compile "kottage:kottage:0.1-SNAPSHOT"
+    compile "com.fasterxml.jackson.core:jackson-databind:2.7.3"
+    testCompile group: "junit", name: "junit", version: "4.11"
+}
+
+sourceSets {
+    main.java.srcDirs += 'src/main/kotlin'
+    test.java.srcDirs += 'src/test/kotlin'
+}
+
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
